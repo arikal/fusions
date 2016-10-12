@@ -15,14 +15,11 @@ class ProductVariationData
     protected $productId;
 
     /**
-     * @var string
+     * Collection of attributes.
+     *
+     * @var array
      */
-    protected $colour;
-
-    /**
-     * @var string
-     */
-    protected $size;
+    protected $attributes = [];
 
     /**
      " @var bool
@@ -53,49 +50,40 @@ class ProductVariationData
     }
 
     /**
-     * Sets the colour.
+     * Sets the attributes.
      *
-     * @param string $colour
+     * @param array $attributes
      *
      * @return $this
      */
-    public function setColour(string $colour)
+    public function setAttributes(array $attributes)
     {
-        $this->colour = $colour;
+        $this->attributes = $attributes;
         return $this;
     }
 
     /**
-     * Gets the colour.
+     * Gets the attributes.
      *
-     * @return string
+     * @return array
      */
-    public function getColour(): string
+    public function getAttributes(): array
     {
-        return $this->colour;
+        return $this->attributes;
     }
 
     /**
-     * Sets the size.
+     * Adds an attribute.
      *
-     * @param string $size
+     * @param string $name
+     * @param string $value
      *
      * @return $this
      */
-    public function setSize(string $size)
+    public function addAttribute(string $name, string $value)
     {
-        $this->size = $size;
+        $this->attributes[$name] = $value;
         return $this;
-    }
-
-    /**
-     * Gets the size.
-     *
-     * @return string
-     */
-    public function getSize(): string
-    {
-        return $this->size;
     }
 
     /**
