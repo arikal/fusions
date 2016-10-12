@@ -1,0 +1,12 @@
+{
+    "name": "arikal/fusions",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Mark Shercliff",
+            "email": "me@markshercliff.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
