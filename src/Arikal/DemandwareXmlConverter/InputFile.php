@@ -38,5 +38,32 @@ class InputFile
      */
     public function getProductData()
     {
+        $fp = fopen($this->inputFile, 'r');
+
+        $productData = [];
+        while (false !== ($row = fgetcsv($fp, 0, ','))) {
+            if (!array_key_exists($row[0], $productData)) {
+                $product = new ProductData();
+                $product
+                    ->setProductId($row[0])
+                    ->setBrand($row[1])
+                    ->setDisplayName($row[2]);
+
+                $productData[$product->getProductId()] = $product;
+            }
+
+            $variation = new ProductVariationData();
+            $variation
+                ->setProductId($row[3])
+                ->setDefault('Y' === $row[6]);
+
+            $variation->addAttribute('colour', $row[4]);
+            $variation->addAttribute('size', $row[5]);
+
+            $product->addVariation($variation);
+        }
+        fclose($fp);
+
+        return array_values($productData);
     }
 }
