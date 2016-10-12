@@ -167,7 +167,7 @@ class ProductData
         $root->appendChild($variations);
 
         $variants = $xml->createElement('variants');
-        $root->appendChild($variants);
+        $variations->appendChild($variants);
 
         foreach ($this->getVariations() as $_variation) {
             $variation = $xml->createElement('variant');
