@@ -20,7 +20,5 @@ require_once __DIR__ . '/vendor/autoload.php';
 $inputFile = new Arikal\DemandwareXmlConverter\InputFile($inputFile);
 $converter = new Arikal\DemandwareXmlConverter\Converter($inputFile);
 
-$xml = $converter->toXml();
+$xml = $converter->toXml()->saveXML();
 echo $xml;
-
-file_put_contents('expected-output.xml', $xml);

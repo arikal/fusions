@@ -108,4 +108,32 @@ class ProductVariationData
     {
         return $this->default;
     }
+
+    /**
+     * Converts the product variation to XML.
+     *
+     * @param DOMDocument $xml
+     *
+     * @return DOMNode
+     */
+    public function toXml(\DOMDocument $xml): \DOMNode
+    {
+        $root = $xml->createElement('product');
+        $productId = $xml->createAttribute('product-id');
+        $productId->value = $this->getProductId();
+        $root->appendChild($productId);
+
+        $attributes = $xml->createElement('custom-attributes');
+        $root->appendChild($attributes);
+
+        foreach ($this->getAttributes() as $name => $value) {
+            $attribute = $xml->createElement('custom-attribute', $value);
+            $attributeId = $xml->createAttribute('attribute-id');
+            $attributeId->value = $name;
+            $attribute->appendChild($attributeId);
+            $attributes->appendChild($attribute);
+        }
+
+        return $root;
+    }
 }

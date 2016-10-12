@@ -138,4 +138,52 @@ class ProductData
         $this->variations[] = $variation;
         return $this;
     }
+
+    /**
+     * Converts the product data to a XML.
+     *
+     * @param DOMDocument $xml
+     *
+     * @return DOMNode
+     */
+    public function toXml(\DOMDocument $xml): \DOMNode
+    {
+        $root = $xml->createElement('product');
+
+        $productId = $xml->createAttribute('product-id');
+        $productId->value = $this->getProductId();
+        $root->appendChild($productId);
+
+        $displayName = $xml->createElement('display-name', $this->getDisplayName());
+        $lang = $xml->createAttribute('xml:lang');
+        $lang->value = 'x-default';
+        $displayName->appendChild($lang);
+        $root->appendChild($displayName);
+
+        $brand = $xml->createElement('brand', $this->getBrand());
+        $root->appendChild($brand);
+
+        $variations = $xml->createElement('variations');
+        $root->appendChild($variations);
+
+        $variants = $xml->createElement('variants');
+        $root->appendChild($variants);
+
+        foreach ($this->getVariations() as $_variation) {
+            $variation = $xml->createElement('variant');
+            $productId = $xml->createAttribute('product-id');
+            $productId->value = $_variation->getProductId();
+            $variation->appendChild($productId);
+
+            if ($_variation->getDefault()) {
+                $default = $xml->createAttribute('default');
+                $default->value = 'true';
+                $variation->appendChild($default);
+            }
+
+            $variants->appendChild($variation);
+        }
+
+        return $root;
+    }
 }

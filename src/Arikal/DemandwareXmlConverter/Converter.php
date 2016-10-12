@@ -31,9 +31,26 @@ class Converter
      *
      * @return string
      */
-    public function toXml(): string
+    public function toXml(): \DOMDocument
     {
+        $xml = new \DOMDocument('1.0', 'UTF-8');
+
+        $root = $xml->createElementNS('http://www.demandware.com/xml/impex/catalog/2006-10-31', 'catalog');
+
+        $catalogId = $xml->createAttribute('catalog-id');
+        $catalogId->value = 'TestCatalog';
+        $root->appendChild($catalogId);
+
+        $xml->appendChild($root);
+
         foreach ($this->inputFile->getProductData() as $product) {
+            $root->appendChild($product->toXML($xml));
+
+            foreach ($product->getVariations() as $variation) {
+                $root->appendChild($variation->toXML($xml));
+            }
         }
+
+        return $xml;
     }
 }
