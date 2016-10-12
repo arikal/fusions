@@ -1,6 +1,6 @@
 <?php
 /**
- * @TODO
+ * Represents an input CSV file.
  *
  * @author Mark Shercliff <mark@arikal.com>
  */

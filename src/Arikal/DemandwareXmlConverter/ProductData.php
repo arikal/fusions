@@ -1,6 +1,6 @@
 <?php
 /**
- * @TODO
+ * Represents a row of product data from the input CSV file.
  *
  * @author Mark Shercliff <mark@arikal.com>
  */

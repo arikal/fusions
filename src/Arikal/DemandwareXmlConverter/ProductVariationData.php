@@ -1,6 +1,6 @@
 <?php
 /**
- * @TODO
+ * Represents a product variation, derived from an input CSV file row.
  *
  * @author Mark Shercliff <mark@arikal.com>
  */

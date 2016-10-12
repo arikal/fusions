@@ -1,6 +1,6 @@
 <?php
 /**
- * @TODO
+ * Converts the given input file to DemandwareXML.
  *
  * @author Mark Shercliff <mark@arikal.com>
  */
